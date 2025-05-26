@@ -1,6 +1,6 @@
 # Astro and Astro Starlight Project
 
-[![GH Pages Deploy](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml/badge.svg)](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml)
+GH Pages Build and Deploy Status : [![GH Pages Deploy](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml/badge.svg)](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml)
 
 ## 🚀 Project Structure
 
