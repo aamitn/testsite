@@ -1,0 +1,96 @@
+---
+import { Icon } from 'astro-icon/components';
+import ThemeSwitcher from './ThemeSwitcher.astro';
+---
+
+<header class="w-full fixed top-0 left-0 z-50 transition-all duration-300" id="site-header">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="/" class="flex items-center space-x-2">
+      <img src="/images/logo.png" alt="WinHider Logo" class="w-10 h-10" />
+      <span class="text-2xl font-bold gradient-text">WinHider</span>
+    </a>
+    
+    <nav class="hidden md:flex space-x-8 items-center">
+      <a href="/" class="font-medium hover:text-primary-600 transition-colors">Home</a>
+      <a href="/#features" class="font-medium hover:text-primary-600 transition-colors">Features</a>
+      <a href="/#download" class="font-medium hover:text-primary-600 transition-colors">Download</a>
+      <a href="/docs/introduction" class="font-medium hover:text-primary-600 transition-colors">Documentation</a>
+      <ThemeSwitcher />
+      <a href="https://github.com/aamitn/winhider" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-primary-600 transition-colors">
+        <Icon name="mdi:github" class="w-6 h-6" />
+      </a>
+    </nav>
+    
+    <button id="mobile-menu-button" class="md:hidden flex items-center" aria-label="Toggle menu">
+      <Icon name="mdi:menu" class="w-6 h-6" />
+    </button>
+  </div>
+  
+  <div id="mobile-menu" class="md:hidden bg-white dark:bg-gray-900 shadow-lg absolute top-full left-0 w-full transform -translate-y-full transition-transform duration-300 ease-in-out">
+    <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+      <a href="/" class="font-medium hover:text-primary-600 transition-colors py-2">Home</a>
+      <a href="/#features" class="font-medium hover:text-primary-600 transition-colors py-2">Features</a>
+      <a href="/#download" class="font-medium hover:text-primary-600 transition-colors py-2">Download</a>
+      <a href="/docs/introduction" class="font-medium hover:text-primary-600 transition-colors py-2">Documentation</a>
+      <div class="py-2">
+        <ThemeSwitcher />
+      </div>
+      <a href="https://github.com/aamitn/winhider" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-primary-600 transition-colors py-2 flex items-center">
+        <Icon name="mdi:github" class="w-6 h-6 mr-2" /> GitHub
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Header scroll behavior
+  const header = document.getElementById('site-header');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  // Handle header background on scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      header.classList.add('bg-white/90', 'dark:bg-gray-900/90', 'backdrop-blur-md', 'shadow-md');
+    } else {
+      header.classList.remove('bg-white/90', 'dark:bg-gray-900/90', 'backdrop-blur-md', 'shadow-md');
+    }
+  });
+  
+  // Initialize header state based on initial scroll position
+  if (window.scrollY > 10) {
+    header.classList.add('bg-white/90', 'dark:bg-gray-900/90', 'backdrop-blur-md', 'shadow-md');
+  }
+  
+  // Mobile menu toggle
+  mobileMenuButton.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.contains('translate-y-0');
+    
+    if (isOpen) {
+      mobileMenu.classList.remove('translate-y-0');
+      mobileMenu.classList.add('-translate-y-full');
+    } else {
+      mobileMenu.classList.remove('-translate-y-full');
+      mobileMenu.classList.add('translate-y-0');
+    }
+  });
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.classList.contains('translate-y-0') && 
+        !mobileMenu.contains(e.target) && 
+        !mobileMenuButton.contains(e.target)) {
+      mobileMenu.classList.remove('translate-y-0');
+      mobileMenu.classList.add('-translate-y-full');
+    }
+  });
+  
+  // Close mobile menu when a link is clicked
+  const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+  mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('translate-y-0');
+      mobileMenu.classList.add('-translate-y-full');
+    });
+  });
+</script>

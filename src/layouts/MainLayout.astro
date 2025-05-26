@@ -1,0 +1,185 @@
+---
+import '@fontsource-variable/inter';
+import '../styles/custom.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { 
+  title = "WinHider - Hide Windows from Screen Sharing & Taskbar",
+  description = "WinHider allows you to hide specific windows from screen sharing applications and from the taskbar/task switcher while maintaining visibility on your own screen."
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://winhider.app/" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://winhider.app/og-image.jpg" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://winhider.app/" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content="https://winhider.app/og-image.jpg" />
+    
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" is:inline></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" is:inline></script>
+  </head>
+  <body class="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100">
+    <div class="flex flex-col min-h-screen">
+      <Header />
+      <main class="flex-grow">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <script>
+      // Initialize GSAP animations
+      document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Animate sections as they come into view
+        gsap.utils.toArray('.animate-on-scroll').forEach((section) => {
+          gsap.from(section, { 
+            y: 50, 
+            opacity: 0, 
+            duration: 1, 
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play none none none"
+            }
+          });
+        });
+        
+        // Animate the GitHub counter
+        const counter = document.querySelector('.github-stars-count');
+        if (counter) {
+          gsap.from(counter, {
+            textContent: 0,
+            duration: 2,
+            ease: "power2.out",
+            snap: { textContent: 1 },
+            scrollTrigger: {
+              trigger: counter,
+              start: "top 80%",
+              toggleActions: "play none none none"
+            },
+            onUpdate: function() {
+              counter.textContent = Math.round(this.targets()[0].textContent);
+            }
+          });
+        }
+      });
+
+
+      // Parallax effect for background elements
+        gsap.utils.toArray('[data-parallax]').forEach(element => {
+          gsap.to(element, {
+            scrollTrigger: {
+              trigger: element,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1
+            },
+            y: (i, target) => {
+              return (ScrollTrigger.maxScroll(window) - target.offsetTop) * 0.1;
+            }
+          });
+        });
+
+      // Text reveal animation
+        gsap.utils.toArray('.text-reveal').forEach(text => {
+          gsap.from(text, {
+            scrollTrigger: {
+              trigger: text,
+              start: "top 90%",
+              toggleActions: "play none none reverse"
+            },
+            duration: 1,
+            opacity: 0,
+            y: 20,
+            ease: "power3.out"
+          });
+        });
+
+
+      // Scale animation for cards and buttons
+      gsap.utils.toArray('.hover-lift').forEach(element => {
+        element.addEventListener('mouseenter', () => {
+          gsap.to(element, {
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+        
+        element.addEventListener('mouseleave', () => {
+          gsap.to(element, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      });
+
+      // Fade in animations for sections
+        gsap.utils.toArray('section').forEach(section => {
+          gsap.from(section, {
+            scrollTrigger: {
+              trigger: section,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "play none none reverse"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out"
+          });
+        });
+
+      // Copy command function
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.closest('.copy-btn')) {
+          const button = e.target.closest('.copy-btn');
+          const commandElement = button.closest('.copy-command');
+          const command = commandElement.querySelector('code').textContent;
+          
+          navigator.clipboard.writeText(command).then(() => {
+            const originalText = button.textContent;
+            button.textContent = "Copied!";
+            button.classList.add("text-green-400");
+            
+            setTimeout(() => {
+              button.textContent = originalText;
+              button.classList.remove("text-green-400");
+            }, 2000);
+          });
+        }
+      });
+      
+    </script>
+  </body>
+</html>

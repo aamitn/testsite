@@ -1,0 +1,66 @@
+---
+title: Installing WinHider
+description: Learn how to install WinHider using different methods.
+---
+
+# Installation
+
+There are multiple ways to install WinHider depending on your preferences. Choose the method that works best for you.
+
+## Using Windows Package Manager (Recommended)
+
+The easiest way to install WinHider is using the Windows Package Manager (winget):
+
+```bash
+winget install aamitn.winhider
+```
+
+This will automatically download and install the latest version of WinHider.
+
+## Using the Installer
+
+1. Download [WinhiderInstaller.exe](https://github.com/aamitn/Winhider/releases/download/latest/WinhiderInstaller.exe) from the latest release.
+2. Run the installer and follow the on-screen instructions.
+3. Once installation completes, you can launch WinHider from the Start Menu.
+
+## Portable Version
+
+If you prefer not to install the application:
+
+1. Download and extract [Winhider.zip](https://github.com/aamitn/Winhider/releases/download/latest/Winhider.zip) from the latest release.
+2. Run either:
+   - `Winhider.exe` for the CLI version (64-bit)
+   - `WinhiderGui.exe` for the GUI version (64-bit)
+   - `Winhider_32bit.exe` for the 32-bit CLI version
+   - `WinhiderGui_32bit.exe` for the 32-bit GUI version
+
+## Microsoft Store
+
+WinHider is also available on the Microsoft Store. Search for "WinHider" or visit the [Microsoft Store link](https://apps.microsoft.com/store/search?publisher=aamitn).
+
+## Building from Source
+
+If you want to build WinHider from source:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/aamitn/Winhider
+   cd Winhider
+   ```
+
+2. Build using Visual Studio:
+   - Open `Winhider.sln` in Visual Studio
+   - Choose your build configuration (Debug/Release)
+   - Build the solution
+
+3. Alternatively, build using PowerShell:
+   ```powershell
+   .\build.ps1
+   ```
+   
+   Note: This requires Visual Studio Build Tools to be installed.
+
+## System Requirements
+
+- Windows 10 version 2004 or newer
+- .NET Framework 4.7.2 or newer (for the GUI version)

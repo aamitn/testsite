@@ -1,0 +1,88 @@
+---
+title: Using WinHider CLI
+description: Learn how to use the command-line interface of WinHider.
+---
+
+# CLI Mode
+
+WinHider's command-line interface provides powerful functionality for advanced users and scripting scenarios.
+
+## Starting the CLI
+
+Launch `Winhider.exe` from the installation directory or command prompt. You'll be dropped into an interactive terminal.
+
+![WinHider CLI](/images/winhider-cli.png)
+
+## Available Commands
+
+In the interactive mode, type `help` to see available commands:
+
+| Command | Description |
+| ------- | ----------- |
+| `list` | List all visible windows |
+| `hide <window_id>` | Hide a window from screen capture |
+| `unhide <window_id>` | Unhide a window from screen capture |
+| `hidetask <window_id>` | Hide a window from taskbar/task switcher |
+| `unhidetask <window_id>` | Unhide a window from taskbar/task switcher |
+| `info <window_id>` | Show detailed information about a window |
+| `help` | Show the help menu |
+| `exit` | Exit the application |
+
+## Command-line Arguments
+
+You can also use WinHider directly from the command line with arguments:
+
+```bash
+Winhider.exe [command] [arguments]
+```
+
+### Examples:
+
+Hide a window with specific ID from screen capture:
+```bash
+Winhider.exe hide 12345
+```
+
+Unhide a window from taskbar:
+```bash
+Winhider.exe unhidetask 12345
+```
+
+List all visible windows:
+```bash
+Winhider.exe list
+```
+
+## Finding Window IDs
+
+To find the ID of a window you want to hide:
+
+1. Run `Winhider.exe list` to see all visible windows
+2. Locate the window in the list and note its ID
+3. Use the ID with the appropriate command
+
+## Using with Scripts
+
+WinHider CLI can be integrated into batch files, PowerShell scripts, or any automation workflow:
+
+```powershell
+# Example PowerShell script to hide Notepad from screen capture
+$notepadProcess = Start-Process notepad -PassThru
+Start-Sleep -Seconds 1
+$notepadWindow = Get-Process | Where-Object {$_.Id -eq $notepadProcess.Id} | Select-Object MainWindowHandle
+& "C:\Program Files\WinHider\Winhider.exe" hide $notepadWindow.MainWindowHandle
+```
+
+## Exit Codes
+
+The CLI returns the following exit codes:
+
+| Code | Meaning |
+| ---- | ------- |
+| 0 | Success |
+| 1 | General error |
+| 2 | Invalid arguments |
+| 3 | Window not found |
+| 4 | Operation failed |
+
+These can be used in scripts to check if operations completed successfully.

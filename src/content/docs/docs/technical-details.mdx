@@ -1,0 +1,86 @@
+---
+title: Technical Details
+description: Learn about the technical implementation of WinHider.
+---
+
+# Technical Details
+
+WinHider uses several Windows API techniques to achieve its functionality. This page explains the technical aspects of how WinHider works.
+
+## Directory Structure
+
+- `Hide`, `Unhide` – DLLs for hiding/unhiding from screen share
+- `HideTask`, `UnhideTask` – DLLs for hiding/unhiding from taskbar/task switcher
+- `Injector` – CLI and DLL Injector code
+- `WinhiderGui` – WinAPI GUI code
+- `Misc` – Miscellaneous files (icons, images, etc.)
+
+## Screen Sharing Concealment
+
+WinHider uses the `SetWindowDisplayAffinity` Windows API function with the `WDA_EXCLUDEFROMCAPTURE` flag to hide windows from screen capture applications.
+
+```cpp
+// Simplified example of how WinHider hides windows from screen capture
+BOOL SetWindowHidden(HWND hwnd) {
+    return SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE);
+}
+
+BOOL SetWindowVisible(HWND hwnd) {
+    return SetWindowDisplayAffinity(hwnd, WDA_NONE);
+}
+```
+
+This API was introduced in Windows 10 version 2004 and is specifically designed to prevent windows from being captured in screenshots and screen recordings.
+
+## Taskbar & Alt-Tab Hiding
+
+To hide windows from the taskbar and Alt-Tab task switcher, WinHider modifies the window's extended styles:
+
+1. It removes the `WS_EX_APPWINDOW` style, which normally causes a window to appear in the taskbar.
+2. It adds the `WS_EX_TOOLWINDOW` style, which prevents the window from showing in the taskbar and Alt-Tab.
+
+```cpp
+// Simplified example of how WinHider hides windows from taskbar
+BOOL HideFromTaskbar(HWND hwnd) {
+    LONG_PTR style = GetWindowLongPtr(hwnd, GWL_EXSTYLE);
+    style &= ~WS_EX_APPWINDOW;  // Remove APPWINDOW style
+    style |= WS_EX_TOOLWINDOW;  // Add TOOLWINDOW style
+    return SetWindowLongPtr(hwnd, GWL_EXSTYLE, style);
+}
+
+BOOL ShowInTaskbar(HWND hwnd) {
+    LONG_PTR style = GetWindowLongPtr(hwnd, GWL_EXSTYLE);
+    style &= ~WS_EX_TOOLWINDOW;  // Remove TOOLWINDOW style
+    style |= WS_EX_APPWINDOW;    // Add APPWINDOW style
+    return SetWindowLongPtr(hwnd, GWL_EXSTYLE, style);
+}
+```
+
+## DLL Injection
+
+WinHider implements these modifications through DLL injection:
+
+1. It opens the target process using `OpenProcess`
+2. Allocates memory in the target process with `VirtualAllocEx`
+3. Writes the DLL path to the allocated memory using `WriteProcessMemory`
+4. Creates a remote thread in the target process with `CreateRemoteThread`
+5. The thread loads the DLL using `LoadLibrary`
+6. The DLL's `DllMain` function applies the appropriate window modifications
+
+This technique allows WinHider to modify windows belonging to other processes.
+
+## AutoHotkey Integration
+
+The hotkey functionality is implemented using AutoHotkey scripts that call the CLI version of WinHider:
+
+```ahk
+; Example of how the AutoHotkey script works
+^+h::RunWait(A_ScriptDir . "\Winhider.exe hide " . "ahk_id " . WinExist("A"))
+^+j::RunWait(A_ScriptDir . "\Winhider.exe unhide " . "ahk_id " . WinExist("A"))
+```
+
+## Compatibility Notes
+
+- **Windows Versions**: WinHider works best on Windows 10 version 2004 and newer.
+- **Application Compatibility**: Most standard Win32 applications work with WinHider. However, applications with custom rendering pipelines might not be fully compatible.
+- **Privileges**: Some operations require matching privilege levels between WinHider and the target application.

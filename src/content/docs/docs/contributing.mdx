@@ -1,0 +1,84 @@
+---
+title: Contributing to WinHider
+description: Learn how to contribute to the WinHider project.
+---
+
+# Contributing
+
+Contributions to WinHider are always welcome! Here's how you can help improve the project.
+
+## Ways to Contribute
+
+You can contribute to WinHider in several ways:
+
+1. **Report Bugs**: If you find a bug, please report it on our [Issues page](https://github.com/aamitn/winhider/issues)
+2. **Suggest Features**: Have an idea for a new feature? Let us know through the Issues page
+3. **Submit Code**: Fix bugs or add new features by submitting Pull Requests
+4. **Improve Documentation**: Help us make the documentation more clear and comprehensive
+5. **Spread the Word**: Share WinHider with others who might find it useful
+
+## Development Setup
+
+To set up WinHider for development:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/aamitn/winhider.git
+   cd winhider
+   ```
+
+2. **Development Requirements**:
+   - Visual Studio 2019 or newer with C++ desktop development workload
+   - .NET Framework 4.7.2 SDK or newer
+   - Windows 10 SDK
+
+3. **Building the Project**:
+   - Open `Winhider.sln` in Visual Studio
+   - Select the appropriate build configuration (Debug/Release)
+   - Build the solution
+
+   Alternatively, you can use the PowerShell script:
+   ```powershell
+   .\build.ps1
+   ```
+
+## Pull Request Process
+
+1. **Fork the Repository**: Create your own fork of the project
+2. **Create a Branch**: Make your changes in a new branch
+3. **Make Changes**: Implement your bug fix or feature
+4. **Test**: Ensure your changes work as expected
+5. **Submit PR**: Open a pull request with a clear description of the changes
+
+## Code Style Guidelines
+
+- Follow the existing code style in the project
+- Use meaningful variable and function names
+- Add comments for complex sections of code
+- Write clear commit messages
+
+## Testing
+
+Before submitting a pull request:
+
+- Test your changes on different Windows versions if possible
+- Check that existing functionality still works
+- Test with different types of windows and applications
+
+## Signing Binaries
+
+For official releases, binaries are signed. Contributors don't need to sign their builds, but if you're preparing a release:
+
+```bash
+sign.cmd -a -p "password"
+```
+
+This signs both main binaries and installer files. See `sign.cmd --help` for more options.
+
+## Getting Help
+
+If you have questions about contributing, feel free to:
+- Open an issue on GitHub
+- Contact the maintainers directly
+
+Thank you for considering contributing to WinHider!

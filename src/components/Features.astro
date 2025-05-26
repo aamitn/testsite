@@ -1,0 +1,59 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const features = [
+  {
+    title: "Hide from Screen Sharing",
+    description: "Hide specific windows from screen sharing applications like Zoom, Microsoft Teams, and Google Meet.",
+    icon: "mdi:eye-off"
+  },
+  {
+    title: "Hide from Taskbar",
+    description: "Remove windows from the taskbar and Alt+Tab task switcher while keeping them fully accessible.",
+    icon: "mdi:dock-window"
+  },
+  {
+    title: "Multiple Interfaces",
+    description: "Use either the intuitive GUI or powerful CLI interface based on your preference.",
+    icon: "mdi:monitor-dashboard"
+  },
+  {
+    title: "Customizable Hotkeys",
+    description: "Quick keyboard shortcuts for hiding/unhiding windows without interrupting your workflow.",
+    icon: "mdi:keyboard"
+  },
+  {
+    title: "Open Source",
+    description: "Fully transparent code that respects your privacy and security.",
+    icon: "mdi:github"
+  },
+  {
+    title: "Multiple Download Options",
+    description: "Install via Winget, Microsoft Store, or download directly from GitHub.",
+    icon: "mdi:package-variant"
+  }
+];
+---
+
+<section id="features" class="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16 animate-on-scroll">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Powerful Features</h2>
+      <p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+        WinHider provides a comprehensive set of tools to maintain your privacy during screen sharing sessions.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature, index) => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-md hover-lift hover-glow animate-on-scroll">
+          <div class="bg-primary-100 dark:bg-primary-900/30 p-3 rounded-lg inline-block mb-4">
+            <Icon name={feature.icon} class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+          </div>
+          <h3 class="text-xl font-semibold mb-2">{feature.title}</h3>
+          <p class="text-gray-600 dark:text-gray-400">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

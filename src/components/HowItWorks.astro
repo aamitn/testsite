@@ -1,0 +1,86 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16 animate-on-scroll">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+      <p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+        WinHider uses advanced Windows API techniques to make windows invisible to screen capture applications while keeping them fully functional on your screen.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="animate-on-scroll order-2 lg:order-1">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-200 dark:border-gray-700">
+          <h3 class="text-xl font-semibold mb-4">Technical Implementation</h3>
+          <div class="space-y-4 text-gray-700 dark:text-gray-300">
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="rounded-full bg-primary-100 dark:bg-primary-900/30 p-1.5">
+                  <Icon name="mdi:check" class="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                </div>
+              </div>
+              <div class="ml-3">
+                <p class="font-medium">SetWindowDisplayAffinity</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Uses Windows API to exclude windows from screen capture.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="rounded-full bg-primary-100 dark:bg-primary-900/30 p-1.5">
+                  <Icon name="mdi:check" class="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                </div>
+              </div>
+              <div class="ml-3">
+                <p class="font-medium">Extended Window Styles Modification</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Removes WS_EX_APPWINDOW and adds WS_EX_TOOLWINDOW styles to hide from taskbar.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="rounded-full bg-primary-100 dark:bg-primary-900/30 p-1.5">
+                  <Icon name="mdi:check" class="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                </div>
+              </div>
+              <div class="ml-3">
+                <p class="font-medium">DLL Injection</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Uses targeted DLL injection to apply window modifications.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="flex-shrink-0 mt-1">
+                <div class="rounded-full bg-primary-100 dark:bg-primary-900/30 p-1.5">
+                  <Icon name="mdi:check" class="w-4 h-4 text-primary-600 dark:text-primary-400" />
+                </div>
+              </div>
+              <div class="ml-3">
+                <p class="font-medium">Hotkey Support</p>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Implements AutoHotkey for quick window hiding/unhiding.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="animate-on-scroll order-1 lg:order-2">
+        <video 
+          class="w-full aspect-video object-cover rounded-xl" 
+          autoplay 
+          loop 
+          muted 
+          playsinline
+          poster="/images/demo-poster.jpg"
+        >
+          <source src="/videos/winhider-demo.webm" type="video/webm" />
+          Your browser doesn't support HTML5 video.
+        </video>
+
+      </div>
+    </div>
+  </div>
+</section>

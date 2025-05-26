@@ -1,0 +1,62 @@
+---
+title: Frequently Asked Questions
+description: Find answers to commonly asked questions about WinHider.
+---
+
+# Frequently Asked Questions
+
+## General Questions
+
+### What OSes are supported?
+Microsoft Windows 10 version 2004 or above. On previous versions of Windows, a black screen shows up instead of hiding the window.
+
+### Do future instances of the application get automatically hidden?
+No, each window must be hidden individually. WinHider doesn't automatically hide new instances of previously hidden applications.
+
+### Is it possible to see a preview of the screen on my side?
+Yes, you can use OBS Studio with Windowed Projectors:
+1. Install [OBS Studio](https://obsproject.com/download)
+2. Open OBS and complete first-time setup
+3. Right-Click under Sources → Add → Display Capture → OK → Select Monitor under "Display" Dropdown → OK
+4. Right-click on the newly created display under sources → Click Windowed Projector
+5. Minimize OBS and check for window hide status in projector window
+6. Multi-Monitor Systems will not require an additional projector
+
+### Could I automatically hide windows using a hotkey?
+Yes! WinHider provides three ways to achieve this:
+1. An Autohotkey script named `hide_hotkey.ahk` (requires Autohotkey v2+)
+2. A precompiled `hide_hotkey.exe` (no additional software required)
+3. The "Activate Hotkeys" button in the GUI
+
+## Technical Questions
+
+### Why doesn't hiding work for some applications?
+Some applications use special rendering methods that bypass the standard Windows display pipeline. Applications with hardware acceleration or custom rendering might not work with WinHider.
+
+### Does WinHider work with remote desktop or virtual machines?
+Results may vary. WinHider is primarily designed for local Windows installations. Remote desktop sessions may not fully support all the Windows API features that WinHider uses.
+
+### Is WinHider compatible with Windows 11?
+Yes, WinHider is fully compatible with Windows 11.
+
+### Will WinHider work with any screen sharing application?
+WinHider works with most mainstream screen sharing applications like Zoom, Microsoft Teams, Google Meet, Discord, and others that use standard Windows capture methods.
+
+## Privacy and Security
+
+### Does WinHider collect any data?
+No, WinHider does not collect any data. It's a completely offline application with no telemetry or data collection.
+
+### Is it safe to use?
+Yes, WinHider is open source, and the code is available for review on GitHub. It only uses documented Windows APIs to achieve its functionality.
+
+### Can others tell that I'm using WinHider?
+No, there's no indication to other users that you're using WinHider. The windows simply don't appear in the screen share.
+
+## Support
+
+### How do I report issues or suggest features?
+Please visit our [GitHub Issues page](https://github.com/aamitn/winhider/issues) to report bugs or suggest new features.
+
+### How can I contribute to the project?
+Contributions are welcome! Please see our [Contributing guide](/docs/contributing) for details on how to help improve WinHider.

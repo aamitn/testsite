@@ -1,0 +1,48 @@
+---
+title: Introduction to WinHider
+description: Learn about WinHider, an application that allows you to hide windows from screen sharing and taskbar/task switcher.
+---
+
+# WinHider
+
+<img src="/images/logo.png" alt="WinHider Logo" width="100" height="100" style="float: left; margin-right: 15px; margin-bottom: 15px;" />
+
+WinHider (short for Window Hider) is an application that allows you to hide user-defined windows from screen sharing applications (Zoom, Microsoft Teams, Google Meet, etc.) and also from the taskbar/task switcher (Alt-Tab).
+
+Originally forked from [radiantly/invisiwind](https://github.com/radiantly/invisiwind), WinHider has been enhanced with additional features and a user-friendly interface.
+
+## What does it do exactly?
+
+WinHider allows you to hide/unhide app windows from screen sharing and taskbar/task switcher while still being able to use and interact with the application on your system.
+
+This is particularly useful when:
+- You want to reference notes during a presentation without viewers seeing them
+- You need to monitor sensitive information while sharing your screen
+- You want to reduce clutter in your taskbar and Alt-Tab switcher
+- You need to keep certain applications accessible but hidden from view
+
+## Key Features
+
+- **Hide from Screen Sharing**: Prevent specific windows from appearing in screen sharing applications
+- **Hide from Taskbar**: Remove windows from the taskbar and Alt-Tab task switcher
+- **Dual Interface**: Use either GUI or CLI based on your preference
+- **Hotkey Support**: Quick keyboard shortcuts for hiding/unhiding windows
+- **Multiple Installation Options**: Install via Winget, GitHub release, or Microsoft Store
+- **Open Source**: Transparent codebase with focus on privacy and security
+
+## Under the Hood
+
+WinHider uses specialized Windows API techniques:
+
+1. **For Screen Sharing Concealment**: 
+   - Employs the `SetWindowDisplayAffinity` API with `WDA_EXCLUDEFROMCAPTURE` flag
+
+2. **For Taskbar/Alt-Tab Hiding**:
+   - Modifies window's extended styles by:
+     - Removing `WS_EX_APPWINDOW` style
+     - Adding `WS_EX_TOOLWINDOW` style
+
+3. **Implementation Method**:
+   - Uses DLL injection to apply these window modifications
+
+The next sections will guide you through installing and using WinHider.
