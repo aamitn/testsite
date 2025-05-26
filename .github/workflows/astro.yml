@@ -32,7 +32,7 @@ jobs:
       - name: Deploy to winhider-website-deploy branch
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: winhider-website-deploy
           force_orphan: true
