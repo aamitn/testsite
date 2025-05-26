@@ -3,8 +3,9 @@ import tailwind from '@astrojs/tailwind';
 import starlight from '@astrojs/starlight';
 import icon from 'astro-icon';
 
+
 export default defineConfig({
-  base: '/testsite/', // <-- match the GitHub repo name/hosting path of your site
+  base: "/", // <-- match the GitHub repo name/hosting path of your site
   integrations: [
     tailwind(),
     icon({

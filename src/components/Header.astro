@@ -6,15 +6,15 @@ import ThemeSwitcher from './ThemeSwitcher.astro';
 <header class="w-full fixed top-0 left-0 z-50 transition-all duration-300" id="site-header">
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <a href="/" class="flex items-center space-x-2">
-      <img src="/images/logo.png" alt="WinHider Logo" class="w-10 h-10" />
+      <img src="./images/logo.png" alt="WinHider Logo" class="w-10 h-10" />
       <span class="text-2xl font-bold gradient-text">WinHider</span>
     </a>
     
     <nav class="hidden md:flex space-x-8 items-center">
-      <a href="/" class="font-medium hover:text-primary-600 transition-colors">Home</a>
-      <a href="/#features" class="font-medium hover:text-primary-600 transition-colors">Features</a>
-      <a href="/#download" class="font-medium hover:text-primary-600 transition-colors">Download</a>
-      <a href="/docs/introduction" class="font-medium hover:text-primary-600 transition-colors">Documentation</a>
+      <a href="./" class="font-medium hover:text-primary-600 transition-colors">Home</a>
+      <a href="./#features" class="font-medium hover:text-primary-600 transition-colors">Features</a>
+      <a href="./#download" class="font-medium hover:text-primary-600 transition-colors">Download</a>
+      <a href="./docs/introduction" class="font-medium hover:text-primary-600 transition-colors">Documentation</a>
       <ThemeSwitcher />
       <a href="https://github.com/aamitn/winhider" target="_blank" rel="noopener noreferrer" class="font-medium hover:text-primary-600 transition-colors">
         <Icon name="mdi:github" class="w-6 h-6" />
@@ -28,10 +28,10 @@ import ThemeSwitcher from './ThemeSwitcher.astro';
   
   <div id="mobile-menu" class="md:hidden bg-white dark:bg-gray-900 shadow-lg absolute top-full left-0 w-full transform -translate-y-full transition-transform duration-300 ease-in-out">
     <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
-      <a href="/" class="font-medium hover:text-primary-600 transition-colors py-2">Home</a>
-      <a href="/#features" class="font-medium hover:text-primary-600 transition-colors py-2">Features</a>
-      <a href="/#download" class="font-medium hover:text-primary-600 transition-colors py-2">Download</a>
-      <a href="/docs/introduction" class="font-medium hover:text-primary-600 transition-colors py-2">Documentation</a>
+      <a href="./" class="font-medium hover:text-primary-600 transition-colors py-2">Home</a>
+      <a href="./#features" class="font-medium hover:text-primary-600 transition-colors py-2">Features</a>
+      <a href="./#download" class="font-medium hover:text-primary-600 transition-colors py-2">Download</a>
+      <a href="./docs/introduction" class="font-medium hover:text-primary-600 transition-colors py-2">Documentation</a>
       <div class="py-2">
         <ThemeSwitcher />
       </div>

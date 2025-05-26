@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import GitHubStats from './GitHubStats.astro';
+import { asset } from '../utils/asset';
 ---
 
 <section class="pt-24 pb-16 md:pt-32 md:pb-24">
@@ -19,11 +20,11 @@ import GitHubStats from './GitHubStats.astro';
         </p>
         
         <div class="mb-8 flex flex-wrap gap-4 hero-flex">
-          <a href="#download" class="btn-primary px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all flex items-center gap-2 hover-lift">
+          <a href="./#download" class="btn-primary px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all flex items-center gap-2 hover-lift">
             <Icon name="mdi:download" class="w-5 h-5" />
             Download Now
           </a>
-          <a href="/docs/introduction" class="btn-secondary px-6 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg font-medium shadow-sm hover:shadow-md transition-all flex items-center gap-2 hover-lift">
+          <a href="./docs/introduction" class="btn-secondary px-6 py-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white rounded-lg font-medium shadow-sm hover:shadow-md transition-all flex items-center gap-2 hover-lift">
             <Icon name="mdi:book-open" class="w-5 h-5" />
             Documentation
           </a>
@@ -47,7 +48,7 @@ import GitHubStats from './GitHubStats.astro';
       
       <div class="relative w-[80%] animate-on-scroll overflow-hidden rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800">
         <img 
-          src="/images/screenshot.png" 
+          src="./images/screenshot.png"
           alt="WinHider working illustration" 
           class="rounded-xl shadow-lg w-full"
           loading="lazy"
