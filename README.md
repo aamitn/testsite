@@ -3,6 +3,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9091f13c-95f3-48d5-9d44-9c09acabfbdd/deploy-status)](https://app.netlify.com/projects/winhider/deploys)
 
+[![Deploy Astro site to Pages](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml/badge.svg)](https://github.com/aamitn/winhider-website/actions/workflows/astro.yml)
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:
