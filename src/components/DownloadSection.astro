@@ -1,30 +1,59 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { getLatestRelease, formatVersion } from '../utils/github.js';
 
-// For a production site, this would fetch the latest release information from GitHub API
-// For this example, we'll use a static version
-const latestVersion = "1.2.0";
-const releaseDate = "May 15, 2024";
+//Repo information
+const owner = "aamitn";
+const repo = "winhider";
 
+// Fetch latest release info from GitHub
+let latestVersion = "Loading...";
+let releaseDate = "";
+let installerLink = "";
+try {
+  const release = await getLatestRelease(owner, repo);
+  if (release) {
+    latestVersion = formatVersion(release.tag_name);
+    releaseDate = new Date(release.published_at).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    installerLink = `https://github.com/${owner}/${repo}/releases/download/${release.tag_name}/WinhiderInstaller.exe`;
+  }
+} catch (e) {
+  latestVersion = "Unavailable";
+  releaseDate = "";
+  installerLink = `https://github.com/${owner}/${repo}/releases/latest`;
+}
+
+// Define download options
 const downloadOptions = [
   {
     title: "Windows Package Manager (Winget)",
     description: "The fastest way to install WinHider",
-    command: "winget install aamitn.winhider",
+    command: "winget install winhider",
     icon: "mdi:microsoft-windows",
     isPrimary: true
   },
   {
     title: "GitHub Release",
-    description: "Download the installer or portable version",
-    link: `https://github.com/aamitn/winhider/releases/latest`,
+    description: "Download the latest installer or portable zip",
+    links: [
+      {
+        label: "Installer (.exe)",
+        url: installerLink,
+        icon: "mdi:download"
+      },
+      {
+        label: "Portable (.zip)",
+        url: installerLink.replace("WinhiderInstaller.exe", "Winhider.zip"),
+        icon: "mdi:archive"
+      }
+    ],
     icon: "mdi:github",
     isPrimary: false
   },
   {
     title: "Microsoft Store",
     description: "Install from the Microsoft Store",
-    link: "https://apps.microsoft.com/store/search?publisher=aamitn",
+    link: "https://apps.microsoft.com/store/search?publisher=bitmutex",
     icon: "mdi:microsoft",
     isPrimary: false
   }
@@ -50,7 +79,7 @@ const downloadOptions = [
           <p class={`mb-4 ${option.isPrimary ? 'text-primary-100' : 'text-gray-600 dark:text-gray-400'}`}>
             {option.description}
           </p>
-          
+
           {option.command ? (
             <div class={`copy-command ${option.isPrimary ? 'bg-primary-700' : 'bg-gray-100 dark:bg-gray-900'}`}>
               <code>{option.command}</code>
@@ -58,10 +87,28 @@ const downloadOptions = [
                 <Icon name="mdi:content-copy" class="w-5 h-5" />
               </button>
             </div>
+          ) : option.links ? (
+            <div class="flex flex-row gap-2">
+              {option.links.map(link => (
+                <a 
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
+                    option.isPrimary 
+                    ? 'bg-white text-primary-600 hover:bg-gray-100' 
+                    : 'bg-primary-600 text-white hover:bg-primary-700'
+                  }`}
+                >
+                  <Icon name={link.icon} class="w-5 h-5" />
+                  {link.label}
+                </a>
+              ))}
+            </div>
           ) : (
             <a 
-              href={option.link} 
-              target="_blank" 
+              href={option.link}
+              target="_blank"
               rel="noopener noreferrer"
               class={`inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${
                 option.isPrimary 
